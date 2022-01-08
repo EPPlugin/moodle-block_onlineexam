@@ -15,35 +15,72 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file keeps track of upgrades to the onlineexam block
+ * Plugin "Exams (evaexam)"
  *
- * Sometimes, changes between versions involve alterations to database structures
- * and other major things that may break installations.
- *
- * The upgrade function in this file will attempt to perform all the necessary
- * actions to upgrade your older installation to the current version.
- *
- * If there's something it cannot do itself, it will tell you what you need to do.
- *
- * The commands in here will all be database-neutral, using the methods of
- * database_manager class
- *
- *
- * @since Moodle 3.1
- * @package block_onlineexam
- * @copyright  2018 Soon Systems GmbH on behalf of Electric Paper Evaluationssysteme GmbH
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    block_onlineexam
+ * @copyright  2020 Alexander Bias on behalf of evasys GmbH
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
- *
- * @param int $oldversion
- * @param object $block
+ * Upgrade steps for this plugin
+ * @param int $oldversion the version we are upgrading from
+ * @return boolean
  */
-function xmldb_block_onlineexam_upgrade($oldversion, $block) {
-    global $CFG;
+function xmldb_block_onlineexam_upgrade($oldversion) {
+
+    // From now on, the setting "block_onlineexam|setting_exam_server" uses SOAP API Version 61 instead of Version 51.
+    if ($oldversion < 2020010903) {
+        // Check if the setting is set in this Moodle instance.
+        $oldsetting = get_config('block_onlineexam', 'exam_server');
+        if (!empty($oldsetting) && strpos($oldsetting, 'soapserver-v51.wsdl') !== false) {
+
+            // Replace the version in the setting.
+            $newsetting = str_replace('soapserver-v51.wsdl', 'soapserver-v61.wsdl', $oldsetting);
+
+            // Write the setting back to the DB.
+            set_config('exam_server', $newsetting, 'block_onlineexam');
+
+            // Show an info message that the SOAP API version has been changed automatically.
+            $message = get_string('upgrade_notice_2020010900', 'block_onlineexam',
+                    array ('old' => $oldsetting, 'new' => $newsetting));
+            echo html_writer::tag('div', $message, array('class' => 'alert alert-info'));
+        }
+
+        // Remember upgrade savepoint.
+        upgrade_plugin_savepoint(true, 2020010903, 'block', 'onlineexam');
+    }
+
+    // Re-branding of the evasys brand.
+    if ($oldversion < 2020060404) {
+        // Check if the blocktitle is set in this Moodle instance.
+        $blocktitlesetting = get_config('block_onlineexam', 'blocktitle');
+        if (!empty($blocktitlesetting)) {
+
+            // If the blocktitle contains the substring 'EvaExam' (case-sensitive).
+            if (strpos($blocktitlesetting, 'EvaExam') !== false) {
+                // Replace the substring with 'evaexam' (case-sensitive).
+                $newblocktitle = str_replace('EvaExam', 'evaexam', $blocktitlesetting);
+
+                // Write the setting back to the DB.
+                set_config('blocktitle', $newblocktitle, 'block_onlineexam');
+            }
+        }
+
+        // Remember upgrade savepoint.
+        upgrade_plugin_savepoint(true, 2020060404, 'block', 'onlineexam');
+    }
+
+    // Show an info message that the plugin has been largely modified.
+    if ($oldversion < 2021112700) {
+        $message = get_string('upgrade_notice_2021112700', 'block_onlineexam');
+        echo html_writer::tag('div', $message, array('class' => 'alert alert-info'));
+
+        // Remember upgrade savepoint.
+        upgrade_plugin_savepoint(true, 2021112700, 'block', 'block_onlineexam');
+    }
 
     return true;
 }

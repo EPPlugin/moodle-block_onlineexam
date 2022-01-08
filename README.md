@@ -1,41 +1,148 @@
 moodle-block_onlineexam
-=====================================
-The moodle plugin allows you to view open exams within a block in Moodle.
+=========================
 
-Detail: 
-By using the "onlineexam" plug-in, open exams for a user are displayed within a block in Moodle. The data request for open exams of a user can is carried out via LTI. 
-The connection to a user can be established either on the basis of the user name or the email address. 
-If the user name is used, a specified EvaExam custom field can serve as a method of authentication. 
-It is possible to define customized LTI parameters and to map the LTI specific roles "Instructor" and "Learner" in Moodle, e.g. "Learner" --> "Student".
-It is also possible to use a pop-up message to alert participants about open exams. 
+[![Moodle Plugin CI](https://github.com/evasys-community/moodle-block_onlineexam/workflows/Moodle%20Plugin%20CI/badge.svg?branch=master)](https://github.com/evasys-community/moodle-block_onlineexam/actions?query=workflow%3A%22Moodle+Plugin+CI%22+branch%3Amaster)
+
+Moodle block plugin which allows you to quickly and easily integrate exams from evaexam into Moodle. With this block, you can place links to evaexam online exams directly on the Moodle frontpage and dashboard as well as on course overview pages.
 
 
-Requirements
-------------
-This plug-in requires Moodle version 3.1 or higher and EvaExam version 8.0 (2200). 
+Moodle requirements
+-------------------
+
+This plugin requires Moodle 3.11+
+
+
+evaexam requirements
+-------------------
+
+Please note that this plugin requires a commercial subscription of evaexam and a running instance of at least evaexam version 7.1 (2151).
+
+For details about evaexam, please see
+https://en.evasys.de/evaexam (english) or
+https://www.evasys.de/evaexam (german).
+
+
+Plugin description
+------------------
+
+This plugin allows you to quickly and easily integrate exams from evaexam into Moodle. With this block, you can place links to evaexam online exams directly on the Moodle frontpage and dashboard as well as on course overview pages.
+
+Two types of connection are available: Data can be exchanged either via an LTI interface or via SOAP web services. Depending on the type of connection, different functions are at your disposal. When using LTI, you can display exam information in the learner view as well as in the instructor view. When using SOAP, exam information can only be displayed in the learner view.
+
+By implementing a single sign-on solution, learners as well as instructors only have to register with Moodle. It is not necessary to enter evaexam PSWDs to participate in exams.
 
 
 Installation
 ------------
 
-Please install the plug-in into the directory "blocks":
+Install the plugin like any other plugin to folder
 /blocks/onlineexam
+
+See http://docs.moodle.org/en/Installing_plugins for details on installing Moodle plugins
 
 
 Usage & Settings
 ----------------
-After installation, the plug-in has to be configured.
-To do this, please go to:
-Site administration--> Plugins --> Blocks --> Exams (EvaExam)
 
-There are three sections:
+To configure the plugin and its behaviour, please visit:
+Site administration -> Plugins -> Blocks -> Exams (evaexam).
 
-### General Settings
+There, you find multiple sections:
 
-Here you can enter information about the block title that is displayed, user identification, connection timeout and the display of the pop-up dialog.
+### Appearance
+
+The settings in this section define how the evaexam block will be displayed.
+
+### Communication
+
+The settings in this section define how the evaexam block will communicate with evaexam.
+
+### SOAP settings
+
+The settings in this section define how the evaexam block will communicate with evaexam.
+These settings are only required if you selected "SOAP" in the "Communication protocol" setting.
+
+### LTI settings
+
+The settings in this section define how the evaexam block will communicate with evaexam.
+These settings are only required if you selected "LTI" in the "Communication protocol" setting.
+
+### Expert settings
+
+The settings in this section normally don't need any modification and are provided for special usage scenarios.
 
 
-### LTI Settings
+Documentation
+-------------
 
-Connection data for LTI is entered here. Furthermore, additional parameters can be defined which will be transferred as well. You can also define role mappings. 
-If the pop-up dialog shall be used, a regular expression must be specified in order to determine whether the LTI result contains open exams.
+An in-depth documentation of the plugin's settings and its usage is provided as PDF on
+https://github.com/evasys-community/moodle-block_onlineexam/blob/master/DOCUMENTATION.en.pdf (english) and
+https://github.com/evasys-community/moodle-block_onlineexam/blob/master/DOCUMENTATION.de.pdf (german).
+
+
+Theme support
+-------------
+This plugin has been developed on and tested with Moodle Core's Boost and Clean (until Moodle 3.6) and Classic (from Moodle 3.7 on) themes.
+While this plugin should also work with other Bootstrap-based third party themes, we can't support any other theme than Boost, Clean and Classic.
+
+
+Plugin repositories
+-------------------
+
+This plugin is published and regularly updated in the Moodle plugins repository:
+http://moodle.org/plugins/view/block_onlineexam
+
+The latest development version can be found on Github:
+https://github.com/evasys-community/moodle-block_onlineexam
+
+
+Bug and problem reports / Support requests
+------------------------------------------
+
+Please report bugs and problems on Github:
+https://github.com/evasys-community/moodle-block_onlineexam/issues
+
+
+Feature proposals
+-----------------
+
+Please issue feature proposals on Github:
+https://github.com/evasys-community/moodle-block_onlineexam/issues
+
+Please create pull requests on Github:
+https://github.com/evasys-community/moodle-block_onlineexam/pulls
+
+
+Translating this plugin
+-----------------------
+
+This Moodle plugin is shipped with an english language pack only. All translations into other languages must be managed through AMOS (https://lang.moodle.org) by what they will become part of Moodle's official language pack.
+
+As the plugin creator, we manage the translation into german on AMOS. Please contribute your translation into all other languages in AMOS where they will be reviewed by the official language pack maintainers for Moodle.
+
+
+Right-to-left support
+---------------------
+
+This plugin has not been tested with Moodle's support for right-to-left (RTL) languages.
+If you want to use this plugin with a RTL language and it doesn't work as-is, you are free to send us a pull request on Github with modifications.
+
+
+Maintainers & Copyright
+-----------------------
+
+Product owner:\
+evasys GmbH\
+www.evasys.de
+
+Current maintainer and developer:\
+Moodle partner lern.link\
+www.lernlink.de
+
+
+Credits
+-------
+
+This plugin was initially developed by:\
+Soon-Systems-GmbH\
+www.soon-systems.de

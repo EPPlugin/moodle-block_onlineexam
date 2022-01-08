@@ -1,16 +1,51 @@
+/* stylelint-disable max-line-length */
+
+/* Remove any border from the iFrame. */
 .block_onlineexam #block_onlineexam_contentframe {
     border: 0;
-    border-radius: 0;
 }
-#onlineexam_glasses .block_onlineexam_glasses_content {
-    content: '';
-    display: block;
-    cursor: pointer;
-    position: absolute;
-    right: -10px;
-    bottom: -10px;
-    font-size: 23px;
-    background-size: 24px;
-    width: 24px;
-    height: 24px;
+
+/* Set the basic size of the iFrame in compact and detailed view. */
+.block_onlineexam #block_onlineexam_contentframe {
+    width: 100%;
+}
+.block_onlineexam #block_onlineexam_contentframe.block_onlineexam_compact {
+    height: 150px;
+}
+.block_onlineexam #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_soap {
+    height: 60px;
+}
+.block_onlineexam #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_lti {
+    height: 120px;
+}
+/* In the detailed view, increase the height as soon as there are exams. */
+.block_onlineexam_examsexist.block_onlineexam_examcount_1 #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_soap {
+    height: 60px;
+}
+.block_onlineexam_examsexist.block_onlineexam_examcount_1 #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_lti {
+    height: 110px;
+}
+.block_onlineexam_examsexist.block_onlineexam_examcount_2 #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_soap {
+    height: 70px;
+}
+.block_onlineexam_examsexist.block_onlineexam_examcount_2 #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_lti {
+    height: 165px;
+}
+.block_onlineexam_examsexist.block_onlineexam_examcount_3 #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_soap {
+    height: 95px;
+}
+.block_onlineexam_examsexist.block_onlineexam_examcount_3 #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_lti {
+    height: 220px;
+}
+.block_onlineexam_examsexist.block_onlineexam_examcount_gt3 #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_soap {
+    height: 120px;
+}
+.block_onlineexam_examsexist.block_onlineexam_examcount_gt3 #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_lti {
+    height: 275px;
+}
+
+/* Style the 'All exams' button to open the modal. */
+.block_onlineexam_allexams {
+    margin-top: 15px;
+    text-align: center;
 }
