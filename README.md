@@ -27,7 +27,7 @@ Plugin description
 
 This plugin allows you to quickly and easily integrate exams from evaexam into Moodle. With this block, you can place links to evaexam online exams directly on the Moodle frontpage and dashboard as well as on course overview pages.
 
-Two types of connection are available: Data can be exchanged either via an LTI interface or via SOAP web services. Depending on the type of connection, different functions are at your disposal. When using LTI, you can display exam information in the learner view as well as in the instructor view. When using SOAP, exam information can only be displayed in the learner view.
+Data will be exchanged via SOAP web services. Exam information can only be displayed in the learner view.
 
 By implementing a single sign-on solution, learners as well as instructors only have to register with Moodle. It is not necessary to enter evaexam PSWDs to participate in exams.
 
@@ -61,11 +61,6 @@ The settings in this section define how the evaexam block will communicate with 
 
 The settings in this section define how the evaexam block will communicate with evaexam.
 These settings are only required if you selected "SOAP" in the "Communication protocol" setting.
-
-### LTI settings
-
-The settings in this section define how the evaexam block will communicate with evaexam.
-These settings are only required if you selected "LTI" in the "Communication protocol" setting.
 
 ### Expert settings
 

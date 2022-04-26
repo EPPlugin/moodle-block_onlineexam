@@ -42,9 +42,6 @@ class block_onlineexam extends block_base {
     /** @var String Error string */
     private $error;
 
-    /** @var String Type of connection - LTI or SOAP */
-    private $connectiontype;
-
     /** @var String Path to .wsdl used for SOAP */
     private $wsdl;
 
@@ -70,15 +67,13 @@ class block_onlineexam extends block_base {
                 $this->title = format_string($config->blocktitle);
             }
 
-            $this->connectiontype = (!empty($config->connectiontype)) ? $config->connectiontype : '';
             $this->debugmode = (!empty($config->exam_debug)) ? $config->exam_debug : false;
 
             // Session information.
             global $USER;
             if ($this->moodleuserid = $USER->id) {
 
-                if ($this->connectiontype == 'SOAP') {
-
+                if (isset($config->exam_server)) {
                     $this->wsdl = $config->exam_server;
 
                     // Quick check of SOAP settings.
@@ -119,33 +114,6 @@ class block_onlineexam extends block_base {
                     } else {
                         $this->isconfigured = false;
                         $this->error = "WSDL namespace parse error";
-                    }
-                } else if ($this->connectiontype == 'LTI') {
-                    // Quick check of some LTI settings.
-                    if (empty($config->lti_url) || empty($config->lti_password) || empty($config->lti_learnermapping)) {
-                        $this->isconfigured = false;
-                        $this->error = get_string('error_lti_settings_error', 'block_onlineexam');
-
-                        $errorinfo = '';
-                        if (empty($config->lti_url)) {
-                            $errorinfo .= get_string('error_lti_url_missing', 'block_onlineexam').'<br>';
-                        }
-                        if (empty($config->lti_password)) {
-                            $errorinfo .= get_string('error_lti_password_missing', 'block_onlineexam').'<br>';
-                        }
-                        if (empty($config->lti_learnermapping)) {
-                            $errorinfo .= get_string('error_lti_learnermapping_missing', 'block_onlineexam').'<br>';
-                        }
-
-                        $context = context_system::instance();
-                        if (has_capability('block/onlineexam:view_debugdetails', $context)) {
-                            if (!empty($errorinfo)) {
-                                $this->error .= "<br>".$errorinfo;
-                            }
-                        }
-
-                    } else {
-                        $this->isconfigured = true;
                     }
                 }
             } else {
@@ -197,11 +165,7 @@ class block_onlineexam extends block_base {
                 $this->content->text .= '<div id="block_onlineexam_exams_content">';
             }
 
-            if ($config->connectiontype == 'LTI') {
-                $connectionclass = 'block_onlineexam_lti';
-            } else if ($config->connectiontype == 'SOAP') {
-                $connectionclass = 'block_onlineexam_soap';
-            }
+            $connectionclass = 'block_onlineexam_soap';
 
             if ($config->presentation == 'brief') {
                 $presentationclass = 'block_onlineexam_compact';

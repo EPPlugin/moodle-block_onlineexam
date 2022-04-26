@@ -40,7 +40,6 @@ $css = array();
 
 if (isset($config)) {
 
-    $connectiontype = $config->connectiontype;
     $debugmode = $config->exam_debug;
 
     // Session information.
@@ -61,9 +60,7 @@ if (isset($config)) {
             $css[] = $CFG->wwwroot.'/blocks/onlineexam/style/block_onlineexam_iframe_compact.css';
         }
 
-        if ($connectiontype == 'SOAP') {
-            $css[] = $CFG->wwwroot.'/blocks/onlineexam/style/block_onlineexam_iframe_detail_soap.css';
-        }
+        $css[] = $CFG->wwwroot.'/blocks/onlineexam/style/block_onlineexam_iframe_detail_soap.css';
 
         $css[] = $CFG->wwwroot.'/blocks/onlineexam/lib/fonts/font-awesome-4.7.0/css/font-awesome.min.css';
     } else {
@@ -114,11 +111,7 @@ if (!empty($error)) {
         echo  get_string('error_occured', 'block_onlineexam', $error);
     }
 } else {
-    if ($connectiontype == 'SOAP') {
-        block_onlineexam_get_soap_content($config, $moodleusername, $moodleemail, $modalzoom);
-    } else if ($connectiontype == 'LTI') {
-        block_onlineexam_get_lti_content($config, $context, $course, $modalzoom);
-    }
+    block_onlineexam_get_soap_content($config, $moodleusername, $moodleemail, $modalzoom);
 }
 echo '</body>';
 echo '</html>';

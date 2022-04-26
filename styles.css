@@ -15,33 +15,18 @@
 .block_onlineexam #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_soap {
     height: 60px;
 }
-.block_onlineexam #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_lti {
-    height: 120px;
-}
 /* In the detailed view, increase the height as soon as there are exams. */
 .block_onlineexam_examsexist.block_onlineexam_examcount_1 #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_soap {
     height: 60px;
 }
-.block_onlineexam_examsexist.block_onlineexam_examcount_1 #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_lti {
-    height: 110px;
-}
 .block_onlineexam_examsexist.block_onlineexam_examcount_2 #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_soap {
     height: 70px;
-}
-.block_onlineexam_examsexist.block_onlineexam_examcount_2 #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_lti {
-    height: 165px;
 }
 .block_onlineexam_examsexist.block_onlineexam_examcount_3 #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_soap {
     height: 95px;
 }
-.block_onlineexam_examsexist.block_onlineexam_examcount_3 #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_lti {
-    height: 220px;
-}
 .block_onlineexam_examsexist.block_onlineexam_examcount_gt3 #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_soap {
     height: 120px;
-}
-.block_onlineexam_examsexist.block_onlineexam_examcount_gt3 #block_onlineexam_contentframe.block_onlineexam_detailed.block_onlineexam_lti {
-    height: 275px;
 }
 
 /* Style the 'All exams' button to open the modal. */

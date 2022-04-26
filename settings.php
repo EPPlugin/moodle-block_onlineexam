@@ -147,21 +147,6 @@ if ($ADMIN->fulltree) {
     );
 
 
-    // Communication channel.
-    $communicationoptions = array();
-    $communicationoptions["SOAP"] = get_string('soap', 'block_onlineexam', null, true);
-    $communicationoptions["LTI"] = get_string('lti', 'block_onlineexam', null, true);
-    $settings->add(
-            new admin_setting_configselect('block_onlineexam/connectiontype',
-                    get_string('setting_communication_interface', 'block_onlineexam', null, true),
-                    get_string('setting_communication_interface_desc', 'block_onlineexam', null, true),
-                    "LTI",
-                    $communicationoptions
-            )
-    );
-    unset($communicationoptions);
-
-
     // User Identifier.
     $userdataoptions = array();
     $userdataoptions["email"] = get_string('email', 'core', null, true);
@@ -280,95 +265,6 @@ if ($ADMIN->fulltree) {
 
 
     /*************************/
-    /* LTI settings.
-    /*************************/
-
-    // Heading.
-    $settings->add(
-            new admin_setting_heading('block_onlineexam/setting_heading_lti',
-                    get_string('setting_heading_lti', 'block_onlineexam', null, true),
-                    get_string('setting_heading_lti_desc', 'block_onlineexam', null, true)
-            )
-    );
-
-
-    // URL of the LTI Provider.
-    $settings->add(
-            new admin_setting_configtext(
-                    'block_onlineexam/lti_url',
-                    get_string('setting_exam_lti_url', 'block_onlineexam', null, true),
-                    get_string('setting_exam_lti_url_desc', 'block_onlineexam', null, true),
-                    '',
-                    PARAM_RAW,
-                    80
-            )
-    );
-
-
-    // LTI password.
-    $settings->add(
-            new admin_setting_configpasswordunmask(
-                    'block_onlineexam/lti_password',
-                    get_string('setting_exam_lti_password', 'block_onlineexam', null, true),
-                    get_string('setting_exam_lti_password_desc', 'block_onlineexam', null, true),
-                    ''
-            )
-    );
-
-
-    // Custom parameters.
-    $settings->add(
-            new admin_setting_configtextarea(
-                    'block_onlineexam/lti_customparameters',
-                    get_string('setting_lti_customparameters', 'block_onlineexam', null, true),
-                    get_string('setting_lti_customparameters_desc', 'block_onlineexam', null, true),
-                    '',
-                    PARAM_RAW,
-                    50,
-                    6
-            )
-    );
-
-
-    // Role mapping "Instructor".
-    $choices = array();
-    $roles = get_all_roles();
-    $systemcontext = context_system::instance();
-    $rolenames = role_fix_names($roles, $systemcontext, ROLENAME_ORIGINAL);
-    if (!empty($rolenames)) {
-        foreach ($rolenames as $key => $role) {
-            if (!array_key_exists($role->id, $choices)) {
-                $choices[$role->id] = $role->localname;
-            }
-        }
-    }
-    $settings->add(
-            new admin_setting_configmultiselect(
-                    'block_onlineexam/lti_instructormapping',
-                    get_string('setting_lti_instructormapping', 'block_onlineexam', null, true),
-                    get_string('setting_lti_instructormapping_desc', 'block_onlineexam', null, true),
-                    array(3, 4),
-                    $choices
-            )
-    );
-
-
-    // Role mapping "Learner".
-    $settings->add(
-            new admin_setting_configmultiselect(
-                    'block_onlineexam/lti_learnermapping',
-                    get_string('setting_lti_learnermapping', 'block_onlineexam', null, true),
-                    get_string('setting_lti_learnermapping_desc', 'block_onlineexam', null, true),
-                    array(5),
-                    $choices
-            )
-    );
-    unset($roles);
-    unset($rolenames);
-    unset($choices);
-
-
-    /*************************/
     /* Expert settings.
     /*************************/
 
@@ -402,32 +298,6 @@ if ($ADMIN->fulltree) {
             PARAM_RAW,
             50,
             6
-        )
-    );
-
-
-    // Learner regular expression.
-    $settings->add(
-        new admin_setting_configtext(
-            'block_onlineexam/lti_regex_learner',
-            get_string('setting_lti_regex_learner', 'block_onlineexam', null, true),
-            get_string('setting_lti_regex_learner_desc', 'block_onlineexam', null, true),
-            BLOCK_ONLINEEXAM_LTI_REGEX_LEARNER_DEFAULT,
-            PARAM_RAW,
-            80
-        )
-    );
-
-
-    // Instructor regular expression.
-    $settings->add(
-        new admin_setting_configtext(
-            'block_onlineexam/lti_regex_instructor',
-            get_string('setting_lti_regex_instructor', 'block_onlineexam', null, true),
-            get_string('setting_lti_regex_instructor_desc', 'block_onlineexam', null, true),
-            BLOCK_ONLINEEXAM_LTI_REGEX_INSTRUCTOR_DEFAULT,
-            PARAM_RAW,
-            80
         )
     );
 }

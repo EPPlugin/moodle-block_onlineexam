@@ -55,18 +55,8 @@ class provider implements
         // Get plugin config.
         $config = get_config('block_onlineexam');
 
-        // If the plugin is using SOAP as connection to evaexam.
-        if ($config->connectiontype == 'SOAP') {
-            $url = $config->exam_server;
-
-            // If the plugin is using LTI as connection to evaexam.
-        } else if ($config->connectiontype == 'LTI') {
-            $url = $config->lti_url;
-
-            // This should not happen, but can happen if the plugin is not correctly configured.
-        } else {
-            $url = 'evaexam';
-        }
+        // As the plugin is using SOAP as connection to evaexam.
+        $url = $config->exam_server;
 
         // If the plugin is configured to use the username as useridentifier for evaexam.
         if ($config->useridentifier == 'username') {
